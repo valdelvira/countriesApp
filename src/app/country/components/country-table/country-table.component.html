@@ -9,12 +9,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let country of countries; let i = index">
+        <tr class="animate__animated animate__fadeIn animate__faster" *ngFor="let country of countries; let i = index">
             <td>{{i+1}}</td>
             <td>
                 <img [src]="country.flag" alt="{{country.name}}" width="50">
             </td>
-            <td>{{country.name}}</td>
+            <td>{{country.capital}}, {{country.name}}</td>
             <td>{{country.population | number}}</td>
             <td><a [routerLink]="['/country',country.alpha2Code]">More...</a></td>
         </tr>

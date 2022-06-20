@@ -1,1 +1,71 @@
-<p>show-country works!</p>
+<div class="animate__animated animate__fadeIn animate__faster">
+
+    <div *ngIf="!country; else divCountry" class="alert alert-info">
+        Espere por favor...
+    </div>
+
+    <ng-template #divCountry>
+        <div class="row">
+            <div class="col-12">
+                <h1>Country: <small>{{country.name}}</small></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h3>Flag:</h3>
+                <img [src]="country.flag" alt="country.name" width="150">
+            </div>
+            <div class="col">
+                <h3>Information</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Capital: </strong> {{country.capital}}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Population: </strong> {{country.population | number}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <h3>Languages</h3>
+        <div class="row">
+            <div class="col">
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let language of country.languages">
+                        <strong>{{language.name}}</strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <h3>Currencies</h3>
+        <div class="row">
+            <div class="col">
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let currency of country.currencies">
+                        <strong>{{currency.name}}</strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <h3>Timezones</h3>
+        <div class="row">
+            <div class="col">
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let timezone of country.timezones">
+                        <strong>{{timezone}}</strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <h3>Borders</h3>
+        <div class="row">
+            <div class="col">
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let border of country.borders">
+                        <strong>{{border}}</strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </ng-template>
+</div>

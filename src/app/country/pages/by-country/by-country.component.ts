@@ -7,18 +7,25 @@ import { CountryService } from '../../services/country.service';
   selector: 'app-by-country',
   templateUrl: './by-country.component.html',
   styles: [
+    `li {
+      cursor: pointer;
+    }
+    `
   ]
 })
 export class ByCountryComponent {
   termino: string = ''
   hasError: boolean = false
   countries: Country[] = []
+  sugestedCountries: Country[] = []
+  showSuggested: boolean = false
 
   constructor(private countryService: CountryService) { }
 
   search(termino: string) {
     this.termino = termino
     this.hasError = false
+    this.showSuggested = false
 
     //hay que subscribirnos para que se ejecute el metodo
     this.countryService.searchCountry(this.termino)
@@ -35,5 +42,19 @@ export class ByCountryComponent {
       })
   }
 
+  sugestion(termino: string) {
+    this.hasError = false
+    this.termino = termino
+    this.showSuggested = true
 
+    this.countryService.searchCountry(termino)
+      .subscribe({
+        next: country => this.sugestedCountries = country.splice(0, 5),
+        error: (error: any) => this.sugestedCountries = []
+      })
+  }
+
+  searchSugestion(termino: string) {
+    this.search(termino)
+  }
 }
